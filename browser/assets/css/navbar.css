@@ -85,11 +85,6 @@
 }
 
 @media (max-width:920px) {
-
-    Header {
-        padding-top: 23px;
-    }
-
     .ControlsArea {
         width: 98%;
     }

@@ -68,9 +68,9 @@ class WebSession {
 		});
 		this.tab.addEventListener('mediaClick', ({detail: value}) => {
 			if (value == 'playing') {
-				this.webview.setAudioMuted(false);
+				this.webview.audioMuted = false;
 			} else {
-				this.webview.setAudioMuted(true);
+				this.webview.audioMuted = true;
 			}
 		});
 		this.tab.addEventListener('contextClick', () => {
@@ -92,8 +92,9 @@ class WebSession {
 		var updateTab = () => {
 			if(this.tab.title != null){
 				this.tab.title = this.webview.getTitle();
+				this.tab.tips = this.webview.getTitle();
 			}
-			if(this.tab.icon == null || this.tab.icon == undefined){
+			if(this.tab.icon == null || this.tab.icon == undefined || this.tab.icon.indexOf('assets/imgs/loader.gif') !== -1){
 				this.tab.icon = 'assets/imgs/favicon_default.png';
 			}
 		};
@@ -120,14 +121,14 @@ class WebSession {
 			}
 		});
 		this.webview.addEventListener('media-started-playing', () => {
-			if(this.webview.isAudioMuted()){
+			if(this.webview.audioMuted){
 				this.tab.mediaControl = 'mute';
 			}else{
 				this.tab.mediaControl = 'play';
 			}
 		});
 		this.webview.addEventListener('media-paused', () => {
-			if(this.webview.isAudioMuted()){
+			if(this.webview.audioMuted){
 				this.tab.mediaControl = 'play';
 			}else{
 				this.tab.mediaControl = 'mute';
@@ -304,9 +305,10 @@ class WebSession {
 	}
 
 	tabContextMenu() {
+		let that = this
 		var NewMenu = new Menu();
 		NewMenu.append(new MenuItem({
-			label: 'New Tab',
+			label: '打开新标签页',
 			click() {
 				window.OhHaiBrowser.tabs.add(window.OhHaiBrowser.settings.homepage, undefined, {
 					selected: true
@@ -325,12 +327,12 @@ class WebSession {
 		NewMenu.append(new MenuItem({
 			type: 'separator'
 		}));
-		if (this.tab.parentElement.classList.contains('ohhai-group-children')) {
+		if (that.tab.parentElement.classList.contains('ohhai-group-children')) {
 			//This tabs is in a group
 			NewMenu.append(new MenuItem({
 				label: 'Remove tab from group',
 				click() {
-					window.OhHaiBrowser.tabs.groups.removeTab(this.tab);
+					window.OhHaiBrowser.tabs.groups.removeTab(that.tab);
 				}
 			}));
 		} else {
@@ -338,7 +340,7 @@ class WebSession {
 			var GroupMenu = [new MenuItem({
 				label: 'New group',
 				click() {
-					window.OhHaiBrowser.tabs.groups.addTab(this.tab, null);
+					window.OhHaiBrowser.tabs.groups.addTab(that.tab, null);
 				}
 			})];
 			var CurrentGroups = document.getElementsByClassName('group');
@@ -352,7 +354,7 @@ class WebSession {
 					GroupMenu.push(new MenuItem({
 						label: GroupTitle,
 						click() {
-							window.OhHaiBrowser.tabs.groups.addTab(this.tab, ThisGroup);
+							window.OhHaiBrowser.tabs.groups.addTab(that.tab, ThisGroup);
 						}
 					}));
 				}
@@ -364,34 +366,34 @@ class WebSession {
 				submenu: GroupMenu
 			}));
 		}
-		if (this.webview.isAudioMuted() == true) {
+		if (that.webview.audioMuted == true) {
 			NewMenu.append(new MenuItem({
-				label: 'Unmute Tab',
+				label: '将这个网页取消静音',
 				click() {
-					this.webview.setAudioMuted(false);
+					that.webview.audioMuted = false;
 				}
 			}));
 		} else {
 			NewMenu.append(new MenuItem({
-				label: 'Mute Tab',
+				label: '将这个网页静音',
 				click() {
-					this.webview.setAudioMuted(true);
+					that.webview.audioMuted = true;
 				}
 			}));
 		}
-		if(this.mode != 'incog'){
-			if(this.mode == 'dock'){
+		if(that.mode != 'incog'){
+			if(that.mode == 'dock'){
 				NewMenu.append(new MenuItem({
 					label: 'Undock Tab',
 					click() {
-						window.OhHaiBrowser.tabs.setMode(this, 'default');
+						window.OhHaiBrowser.tabs.setMode(that, 'default');
 					}
 				}));
 			}else{
 				NewMenu.append(new MenuItem({
 					label: 'Dock Tab',
 					click() {
-						window.OhHaiBrowser.tabs.setMode(this, 'dock');
+						window.OhHaiBrowser.tabs.setMode(that, 'dock');
 					}
 				}));
 			}
@@ -400,9 +402,9 @@ class WebSession {
 			type: 'separator'
 		}));
 		NewMenu.append(new MenuItem({
-			label: 'Close Tab',
+			label: '关闭标签页',
 			click() {
-				window.OhHaiBrowser.tabs.remove(this);
+				window.OhHaiBrowser.tabs.remove(that);
 			}
 		}));
 

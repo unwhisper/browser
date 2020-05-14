@@ -43,8 +43,8 @@
 }
 
 .LeftMenuShow {
-	width: 200px;
-	border-right: 1px solid #190a25;
+	width: auto;
+	display: inline-block;
 }
 
 .SidControls{
@@ -63,7 +63,6 @@
 
 #Sid {
 	background: var(--sidebar_bg);
-	width: 100%;
 }
 
 #Sid .panel {

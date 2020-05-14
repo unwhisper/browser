@@ -39,6 +39,10 @@
 
     .hidden{display:none;}        
     #tabs-menu{display: flex;max-width: calc(100vw - 200px)}
+    #tabs-menu .menu-session{
+        min-width: 10px;
+        width: 185px;
+    }
     #tabs-menu .group{border:none;border-bottom:1px solid #999;height: inherit;}
     #tabs-menu .group .ohhai-group-header{padding: 5px;font-size: 14px;background-color: #c4c4c4;}
 

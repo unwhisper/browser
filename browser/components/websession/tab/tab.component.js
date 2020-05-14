@@ -14,7 +14,7 @@ class tabItem extends HTMLElement{
 		const shadowEl = this.attachShadow({mode: 'open'});
 		shadowEl.innerHTML = `
             <link rel='stylesheet' href='${__dirname}/tab.component.css' />
-            <div class='ohhai-tab ${opts.mode ? opts.mode : 'default'} ${opts.selected ? 'selected' : ''}'>
+            <div class='ohhai-tab ${opts.mode ? opts.mode : 'default'} ${opts.selected ? 'selected' : ''}' title='${opts.title ? opts.title : '新标签页'}'>
                 <a class='tab-mediabtn hidden'></a>
                 <img src='${opts.icon ? opts.icon : 'assets/imgs/favicon_default.png'}' class='tab-favicon'/>
                 <span class='tab-title'>${opts.title ? opts.title : '新标签页'}</span>
@@ -72,6 +72,9 @@ class tabItem extends HTMLElement{
 		this.dispatchEvent(new Event('modeChange', {bubbles: true, composed: true}));
 	}
  
+	get icon(){
+		return this.img_FavIco.src
+	}
 	set icon(value){
 		this.img_FavIco.src = value;
 	}
@@ -82,6 +85,13 @@ class tabItem extends HTMLElement{
 	set title(value){
 		this.lbl_Title.textContent = value;
 		this.dispatchEvent(new Event('titleChange', {bubbles: true, composed: true, detail: value}));
+	}
+
+	get tips(){
+		return this.tab_outer.title;
+	}
+	set tips(value){
+		this.tab_outer.title = value;
 	}
 
 	get selected(){

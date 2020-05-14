@@ -85,10 +85,12 @@ const Tabs = {
 					}
 					Sessions.Set(_ID, 'default', 'TempTitle', _OPTIONS.mode, '/assets/imgs/logo.png').then(() => {
 						NewWS.tab.setAttribute('data-session', _ID);
+						NewWS.tab.classList.add('menu-session')
 						Sessions.UpdateParent(_ID, TabParent);
 					});
 				} else {
 					NewWS.tab.setAttribute('data-session', _ID);
+					NewWS.tab.classList.add('menu-session')
 				}
 			}
 	

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>OhHai Browser</title>
+		<link rel="StyleSheet" href="assets/css/style.css" />
+		<link id="ThemeStyle" rel="StyleSheet" href="themes/default.css" />
+	</head>
+	<body>
+		<div id="AppBound">
+			<header class="Navbar">
+				<div id="Sid" class="OhHai-TabMenu LeftMenuShow" style="-webkit-app-region: no-drag;">
+					<div title='Tabs' active='true'>
+						<div class="TabContainer">
+							<div id="Tabs">
+								<div id="tabs-dock" class="ohhai-docktabs"></div>
+								<div id="tabs-menu" class="ohhai-maintabs"></div>
+							</div>
+							<button id="AddTab" title="Add a new tab" class="CommandBtn AddTab"></button>
+						</div>
+					</div>
+					<!-- <div title='Bookmarks' >
+						<div id="FavoritesList"></div>
+					</div>
+					<div title='History' >
+						<div id="HistoryList"></div>
+					</div> -->
+				</div>
+				<!--== nav controls start ================================================================================-->
+				<div class="ControlsArea">
+					<div class="Center">
+						<div class="FlexControl">
+							<button id="Back" title="Click to go back" class="ControlButton Back">
+								<i data-feather="chevron-left" height="28px" width="28px"></i>
+							</button>
+						</div>
+						<div class="FlexControl">
+							<button id="Forward" title="Click to go forward" class="ControlButton Forward">
+								<i data-feather="chevron-right" height="28px" width="28px"></i>
+							</button>
+						</div>
+						<div class="CenterCenter">
+							<url-bar id="URLBar"></url-bar>
+						</div>
+					</div>
+					<div class="FlexControl">
+						<button id="Menu" title="Browser options menu" class="ControlButton OverflowMenu">
+							<i data-feather="menu" height="28px" width="24px"></i>
+						</button>
+					</div>
+				</div>
+				<!--== nav controls end ==================================================================================-->
+			</header>
+
+			<div id="Content">
+				<div id="BrowserWin"></div>
+			</div>
+		</div>
+
+		<model-popup id="modelPopup" title=""></model-popup>
+
+		<!-- Hover link preview-->
+		<p id='hov_url'></p>
+
+		<!--== window controls start =============================================================================-->
+		<frame-controls id="frameControls"></frame-controls>
+		<!--== window controls end ===============================================================================-->
+	</body>
+</html>

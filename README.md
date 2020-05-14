@@ -6,7 +6,7 @@ npm install
 ```
 Once this is done you can open the project in your editor of choice and run:
 ```
-npm run debug
+npm run dev
 ```
 This should open the development version of the browser. 
 

@@ -1,20 +1,16 @@
 {
-  "name": "ohhaibrowser",
-  "productName": "OhHai Browser",
-  "version": "3.4.0",
+  "name": "browser",
+  "productName": "Browser",
+  "version": "1.0.0",
   "license": "ISC",
   "description": "Browser the internet",
-  "homepage": "https://ohhaibrowser.com",
-  "author": {
-    "name": "Lucas Reade",
-    "email": "lucas.reade@gmail.com"
-  },
+  "author": "whisper",
   "main": "main.js",
   "scripts": {
     "lint": "eslint -c .eslintrc.json . --ext .js --fix",
-    "debug": "electron .",
+    "dev": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "build": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "files": [
@@ -46,12 +42,11 @@
         {
           "target": "nsis",
           "arch": [
-            "x64",
             "ia32"
           ]
         }
       ],
-      "requestedExecutionLevel": "asInvoker"
+      "requestedExecutionLevel": "highestAvailable"
     },
     "fileAssociations": {
       "ext": [
@@ -70,7 +65,16 @@
       "role": "Viewer"
     },
     "nsis": {
-      "perMachine": true
+      "perMachine": true,
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "browser/assets/icons/win_icon.ico",
+      "uninstallerIcon": "browser/assets/icons/win_icon.ico",
+      "installerHeaderIcon": "browser/assets/icons/win_icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "browser"
     }
   },
   "dependencies": {

@@ -21,8 +21,8 @@ class MainWindow extends BrowserWindow {
 			width,
 			height,
 			title: app.name,
-			// titleBarStyle: 'hiddenInset',
-			// frame: false,
+			titleBarStyle: 'hiddenInset',
+			frame: false,
 			icon: iconPath,
 			show: false,
 			minHeight: 350,
@@ -38,7 +38,7 @@ class MainWindow extends BrowserWindow {
 			win.maximize();
 		}
 	
-		// win.removeMenu();
+		win.removeMenu();
 		win.loadURL(`${path.join('file://', app.getAppPath(), '/browser/index.html')}`);
 	
 		win.on('closed', () => {
